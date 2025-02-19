@@ -90,7 +90,7 @@ export default function Home() {
           <button
             id="clear-search-btn"
             onClick={onClick}
-            className="text-white font-bold px-4 py-2 rounded-lg text-lg cursor-pointer duration-200"
+            className="text-white font-bold ml-2 px-4 py-2 rounded-lg text-lg cursor-pointer duration-200"
           >
             Clear Search
           </button>
