@@ -1,7 +1,8 @@
 import db from "..";
 import { advocates } from "../schema";
+import type { Advocate, Specialty } from "@/app/types";
 
-const specialties = [
+const specialties: Specialty[] = [
   "Bipolar",
   "LGBTQ",
   "Medication/Prescribing",
@@ -37,8 +38,9 @@ const randomSpecialty = () => {
   return [random1, random2];
 };
 
-const advocateData = [
+const advocateData: Advocate[] = [
   {
+    id: 1,
     firstName: "John",
     lastName: "Doe",
     city: "New York",
@@ -46,8 +48,10 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 10,
     phoneNumber: 5551234567,
+    createdAt: new Date(),
   },
   {
+    id: 2,
     firstName: "Jane",
     lastName: "Smith",
     city: "Los Angeles",
@@ -55,8 +59,10 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 8,
     phoneNumber: 5559876543,
+    createdAt: new Date(),
   },
   {
+    id: 3,
     firstName: "Alice",
     lastName: "Johnson",
     city: "Chicago",
@@ -64,8 +70,10 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 5,
     phoneNumber: 5554567890,
+    createdAt: new Date(),
   },
   {
+    id: 4,
     firstName: "Michael",
     lastName: "Brown",
     city: "Houston",
@@ -73,8 +81,10 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 12,
     phoneNumber: 5556543210,
+    createdAt: new Date(),
   },
   {
+    id: 5,
     firstName: "Emily",
     lastName: "Davis",
     city: "Phoenix",
@@ -82,8 +92,10 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 7,
     phoneNumber: 5553210987,
+    createdAt: new Date(),
   },
   {
+    id: 6,
     firstName: "Chris",
     lastName: "Martinez",
     city: "Philadelphia",
@@ -91,8 +103,10 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 9,
     phoneNumber: 5557890123,
+    createdAt: new Date(),
   },
   {
+    id: 7,
     firstName: "Jessica",
     lastName: "Taylor",
     city: "San Antonio",
@@ -100,8 +114,10 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 11,
     phoneNumber: 5554561234,
+    createdAt: new Date(),
   },
   {
+    id: 8,
     firstName: "David",
     lastName: "Harris",
     city: "San Diego",
@@ -109,8 +125,10 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 6,
     phoneNumber: 5557896543,
+    createdAt: new Date(),
   },
   {
+    id: 9,
     firstName: "Laura",
     lastName: "Clark",
     city: "Dallas",
@@ -118,8 +136,10 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 4,
     phoneNumber: 5550123456,
+    createdAt: new Date(),
   },
   {
+    id: 10,
     firstName: "Daniel",
     lastName: "Lewis",
     city: "San Jose",
@@ -127,8 +147,10 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 13,
     phoneNumber: 5553217654,
+    createdAt: new Date(),
   },
   {
+    id: 11,
     firstName: "Sarah",
     lastName: "Lee",
     city: "Austin",
@@ -136,8 +158,10 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 10,
     phoneNumber: 5551238765,
+    createdAt: new Date(),
   },
   {
+    id: 12,
     firstName: "James",
     lastName: "King",
     city: "Jacksonville",
@@ -145,8 +169,10 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 5,
     phoneNumber: 5556540987,
+    createdAt: new Date(),
   },
   {
+    id: 13,
     firstName: "Megan",
     lastName: "Green",
     city: "San Francisco",
@@ -154,8 +180,10 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 14,
     phoneNumber: 5559873456,
+    createdAt: new Date(),
   },
   {
+    id: 14,
     firstName: "Joshua",
     lastName: "Walker",
     city: "Columbus",
@@ -163,8 +191,10 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 9,
     phoneNumber: 5556781234,
+    createdAt: new Date(),
   },
   {
+    id: 15,
     firstName: "Amanda",
     lastName: "Hall",
     city: "Fort Worth",
@@ -172,6 +202,7 @@ const advocateData = [
     specialties: specialties.slice(...randomSpecialty()),
     yearsOfExperience: 3,
     phoneNumber: 5559872345,
+    createdAt: new Date(),
   },
 ];
 
