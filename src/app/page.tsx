@@ -7,6 +7,7 @@ import "./styles/page.css";
 export default function Home() {
   const [advocates, setAdvocates] = useState([]);
   const [filteredAdvocates, setFilteredAdvocates] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetch("/api/advocates").then((response) => {
@@ -18,10 +19,7 @@ export default function Home() {
   }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchTerm = e.target.value;
-
-    const searchTermElement = document.getElementById("search-term");
-    if (searchTermElement) searchTermElement.innerHTML = searchTerm;
+    setSearchTerm(e.target.value);
 
     const includesSpecialty = (specialties: Specialty[]): boolean => {
       return specialties
@@ -44,8 +42,9 @@ export default function Home() {
   };
 
   const onClick = () => {
-    console.log(advocates);
     setFilteredAdvocates(advocates);
+    setSearchTerm("");
+    clearSearchInput();
   };
 
   const formatPhoneNumber = (phoneNumber: number): string => {
@@ -56,23 +55,45 @@ export default function Home() {
     )}-${phoneNumberString.slice(6)}`;
   };
 
+  const clearSearchInput = () => {
+    const searchInputElement = document.getElementById(
+      "search-input"
+    ) as HTMLInputElement;
+    searchInputElement.value = "";
+  };
+
   return (
     <main id="main-wrapper" className="flex flex-col">
       <header
         id="header-wrapper"
         className="fixed w-screen bg-white px-8 shadow-md flex items-center"
       >
-        <h1 id="header">Solace Advocates</h1>
+        <h1 id="header" className="text-3xl">
+          Solace Advocates
+        </h1>
       </header>
 
       <div id="content-wrapper" className="m-8 flex-grow-1 flex flex-col">
-        <div id="search-area" className="m-4">
-          <p>Search</p>
+        <div id="search-area" className="my-4">
           <p>
-            Searching for: <span id="search-term"></span>
+            Searching for: <span id="search-term">{searchTerm}</span>
           </p>
-          <input style={{ border: "1px solid black" }} onChange={onChange} />
-          <button onClick={onClick}>Reset Search</button>
+          <label htmlFor="search-input" className="block text-lg">
+            Search
+          </label>
+          <input
+            id="search-input"
+            className="px-4 py-2 rounded-lg text-lg"
+            style={{ border: "1px solid black" }}
+            onChange={onChange}
+          />
+          <button
+            id="clear-search-btn"
+            onClick={onClick}
+            className="text-white font-bold px-4 py-2 rounded-lg text-lg cursor-pointer duration-200"
+          >
+            Clear Search
+          </button>
         </div>
 
         <div

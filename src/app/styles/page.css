@@ -8,7 +8,14 @@
 
 #header {
   color: var(--primary);
-  font-size: calc(32 / 16 * 1rem);
+}
+
+#clear-search-btn {
+  background: var(--primary);
+
+  &:hover {
+    background: var(--primary-light);
+  }
 }
 
 #content-wrapper {
