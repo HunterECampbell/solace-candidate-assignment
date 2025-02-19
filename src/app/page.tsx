@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Advocate, Specialty } from "./types";
+import "./styles/page.css";
 
 export default function Home() {
   const [advocates, setAdvocates] = useState([]);
@@ -22,13 +23,19 @@ export default function Home() {
     const searchTermElement = document.getElementById("search-term");
     if (searchTermElement) searchTermElement.innerHTML = searchTerm;
 
+    const includesSpecialty = (specialties: Specialty[]): boolean => {
+      return specialties
+        .map((specialty) => specialty.toLowerCase())
+        .includes(searchTerm.toLowerCase());
+    };
+
     const filteredAdvocates = advocates.filter((advocate: Advocate) => {
       return (
-        advocate.firstName.includes(searchTerm) ||
-        advocate.lastName.includes(searchTerm) ||
-        advocate.city.includes(searchTerm) ||
-        advocate.degree.includes(searchTerm) ||
-        advocate.specialties.includes(searchTerm as Specialty) ||
+        advocate.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        advocate.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        advocate.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        advocate.degree.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        includesSpecialty(advocate.specialties) ||
         advocate.yearsOfExperience === Number(searchTerm)
       );
     });
@@ -41,53 +48,75 @@ export default function Home() {
     setFilteredAdvocates(advocates);
   };
 
+  const formatPhoneNumber = (phoneNumber: number): string => {
+    const phoneNumberString = phoneNumber.toString();
+    return `(${phoneNumberString.slice(0, 3)}) ${phoneNumberString.slice(
+      3,
+      6
+    )}-${phoneNumberString.slice(6)}`;
+  };
+
   return (
-    <main style={{ margin: "24px" }}>
-      <h1>Solace Advocates</h1>
-      <br />
-      <br />
-      <div>
-        <p>Search</p>
-        <p>
-          Searching for: <span id="search-term"></span>
-        </p>
-        <input style={{ border: "1px solid black" }} onChange={onChange} />
-        <button onClick={onClick}>Reset Search</button>
-      </div>
-      <br />
-      <br />
-      <table>
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>City</th>
-            <th>Degree</th>
-            <th>Specialties</th>
-            <th>Years of Experience</th>
-            <th>Phone Number</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredAdvocates.map((advocate: Advocate) => {
-            return (
-              <tr key={`advocate-${advocate.id}`}>
-                <td>{advocate.firstName}</td>
-                <td>{advocate.lastName}</td>
-                <td>{advocate.city}</td>
-                <td>{advocate.degree}</td>
-                <td>
-                  {advocate.specialties.map((specialty, index) => (
-                    <div key={`specialty-${index}`}>{specialty}</div>
-                  ))}
-                </td>
-                <td>{advocate.yearsOfExperience}</td>
-                <td>{advocate.phoneNumber}</td>
+    <main id="main-wrapper" className="flex flex-col">
+      <header
+        id="header-wrapper"
+        className="fixed w-screen bg-white px-8 shadow-md flex items-center"
+      >
+        <h1 id="header">Solace Advocates</h1>
+      </header>
+
+      <div id="content-wrapper" className="m-8 flex-grow-1 flex flex-col">
+        <div id="search-area" className="m-4">
+          <p>Search</p>
+          <p>
+            Searching for: <span id="search-term"></span>
+          </p>
+          <input style={{ border: "1px solid black" }} onChange={onChange} />
+          <button onClick={onClick}>Reset Search</button>
+        </div>
+
+        <div
+          id="table-card"
+          className="h-full shadow-md overflow-auto custom-scrollbar rounded-3xl mb-8"
+        >
+          <table className="w-full">
+            <thead>
+              <tr className="sticky top-0 bg-gray-100">
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>City</th>
+                <th>Degree</th>
+                <th>Specialties</th>
+                <th>Years of Experience</th>
+                <th>Phone Number</th>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            </thead>
+
+            <tbody className="bg-white-100">
+              {filteredAdvocates.map((advocate: Advocate) => {
+                return (
+                  <tr
+                    key={`advocate-${advocate.id}`}
+                    className="border-t-2 border-b-2 border-solid"
+                  >
+                    <td>{advocate.firstName}</td>
+                    <td>{advocate.lastName}</td>
+                    <td>{advocate.city}</td>
+                    <td>{advocate.degree}</td>
+                    <td>
+                      {advocate.specialties.map((specialty, index) => (
+                        <div key={`specialty-${index}`}>{specialty}</div>
+                      ))}
+                    </td>
+                    <td>{advocate.yearsOfExperience}</td>
+                    <td>{formatPhoneNumber(advocate.phoneNumber)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </main>
   );
 }
