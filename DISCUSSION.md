@@ -12,3 +12,9 @@
 - Work on responsiveness
   - Make the table more readable so overflow-x isn't needed
 - Add a search button so it stops searching on every keystroke and only performs a search when this button is pressed
+- Add the primary colors to tailwind's theme variables
+- Fix the main content's body so it doesn't need a margin-top to stop overlapping with the header
+- Work with the backend devs to add ascending/descending sorting functionality
+  - Add this sorting functionality to the table's headers to let the user sort the table
+- Make the `filterAdvocates` more readable
+- Change the generic `onChange` and `onClick` functions to a more specific name
